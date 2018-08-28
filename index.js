@@ -55,12 +55,13 @@ function displayInfo(data) {
 
             if (item.recipe) {
                 const recipe = _.map(item.recipe, compo => {
-                    const infosRecipe = getInfoItem(allJsonData, compo)
+                    const infosRecipe = getInfoItem(allJsonData, compo);
                     if (_.first(infosRecipe)) {
-                        return _.first(infosRecipe).bid * compo.quantity;
+                        return Math.round(getFirstRealPrice(infosRecipe).bid * compo.quantity);
                     }
                     return 0;
                 })
+                
                 item.mean = getAveragePrice(infos);
                 item.cost = _.sum(recipe);
                 item.margin = item.mean - _.sum(recipe);
