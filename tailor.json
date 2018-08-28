@@ -1,0 +1,27 @@
+[
+    {
+        "id": 154695,
+        "label": "Deep Sea Bag",
+        "info": null,
+        "recipe": [
+            {
+                "id": 152577,
+                "quantity": 30
+            },
+            {
+                "id": 152576,
+                "quantity": 15
+            }
+        ]
+    },
+    {
+        "id": 152577,
+        "label": "Deep Sea Satin",
+        "info": null
+    },
+    {
+        "id": 152576,
+        "label": "Embersilk Cloth",
+        "info": null
+    }
+]

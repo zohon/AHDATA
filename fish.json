@@ -1,0 +1,50 @@
+[
+    {
+        "id": 152547,
+        "label": "Poisson-chat de la Grande mer",
+        "area": "Inland",
+        "zone": "Any"
+    },
+    {
+        "id": 152549,
+        "label": "Loche à caudale rouge",
+        "area": "Inland",
+        "zone": "Zandalar"
+    },
+    {
+        "id": 152544,
+        "label": "Maquereau visqueux",
+        "area": "Coastal",
+        "zone": "Zandalar"
+    },
+    {
+        "id": 152543,
+        "label": "Trouble-sable",
+        "area": "Coastal",
+        "zone": "Zandalar"
+    },
+    {
+        "id": 162515,
+        "label": "Saumon de minuit",
+        "area": "Any",
+        "zone": "Any"
+    },
+    {
+        "id": 152546,
+        "label": "Vivaneau rayé",
+        "area": "Coastal",
+        "zone": "Kul Tiras"
+    },
+    {
+        "id": 152546,
+        "label": "Crocs-pointus frénétique",
+        "area": "Coastal",
+        "zone": "Kul Tiras"
+    },
+    {
+        "id": 152547,
+        "label": "Perche de Tiragarde",
+        "area": "Inland",
+        "zone": "Kul Tiras"
+    }
+]
