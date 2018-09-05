@@ -48,8 +48,8 @@ function displayInfo(data) {
         const infos = getInfoItem(allJsonData, item);
         if (_.first(infos)) {
             item.nb = _.sumBy(infos, 'quantity');
-            item.low = getFirstRealPrice(infos).bid;
-            item.margin = getFirstRealPrice(infos).bid;
+            item.low = getFirstRealPrice(infos).buyout;
+            item.margin = getFirstRealPrice(infos).buyout;
             item.cost = '';
             item.mean = getAveragePrice(infos);
 
@@ -57,14 +57,14 @@ function displayInfo(data) {
                 const recipe = _.map(item.recipe, compo => {
                     const infosRecipe = getInfoItem(allJsonData, compo);
                     if (_.first(infosRecipe)) {
-                        return Math.round(getFirstRealPrice(infosRecipe).bid * compo.quantity);
+                        return Math.round(getFirstRealPrice(infosRecipe).buyout * compo.quantity);
                     }
                     return 0;
                 })
                 
                 item.mean = getAveragePrice(infos);
                 item.cost = _.sum(recipe);
-                item.margin = item.mean - _.sum(recipe);
+                item.margin = Math.round(item.low - _.sum(recipe));
             }
 
         }
@@ -78,43 +78,57 @@ function displayInfo(data) {
     console.log(chalk.blue(fileDate.toLocaleString()), chalk.green(event.toLocaleString()));
     console.log(chalk.yellow('-----------------------------------------------'));
     _.each(result, res => {
-        const info = [res.zone, res.area, res.info];
-        const display = [
-            chalk.bold(res.type),
-            chalk.bold(res.label),
-            chalk.cyan(res.low),
-            chalk.magenta(res.mean),
-            chalk.red(res.cost),
-            chalk.yellow(res.margin),
-            chalk.green("["+res.nb+"]"),
-            _.filter(info).join(' ')
-        ]
+        if(res) {
 
-        console.log(
-            _.filter(display).join(' ')
-        );
+            const info = [res.zone, res.area, res.info];
+            const display = [
+                chalk.bold(res.type),
+                chalk.bold(res.label),
+                chalk.cyan(displayUndefined(res.low)),
+                chalk.magenta(displayUndefined(res.mean)),
+                chalk.red(displayUndefined(res.cost)),
+                chalk.yellow(displayUndefined(res.margin)),
+                chalk.green("["+displayUndefined(res.nb)+"]"),
+                _.filter(info).join(' ')
+            ]
+            console.log(
+                _.filter(display).join(' ')
+            );
+        }
     });
     oldData = result;
 }
 
+function displayUndefined(data) {
+    if(!data) {
+        return 0;
+    }
+    return data;
+}
+
 function getInfoItem(allJsonData, item) {
-    const fishs = _.filter(allJsonData.auctions, { item: item.id });
+    let fishs = _.filter(allJsonData.auctions, { item: item.id});
+    fishs = _.filter(fishs, 'buyout');
+    if (!fish.length) {
+        return [];
+    }
     const prices = _.map(fishs, fish => {
-        return { bid: Math.round((fish.bid / fish.quantity) / 100) / 100, quantity: fish.quantity };
+        return { buyout: Math.round((fish.buyout / fish.quantity) / 100) / 100, quantity: fish.quantity };
     });
-    return _.orderBy(prices, ['bid', 'quantity'], ['asc', 'asc']);
+    return _.orderBy(prices, ['buyout', 'quantity'], ['asc', 'asc']);
 }
 
 function getFirstRealPrice(items) {
-    const average = getAveragePrice(items);
-    return _.find(items, item => {
-        return item.bid >= average * 0.3;
-    });
+    return _.first(items);
+    // const average = getAveragePrice(items);
+    // return _.find(items, item => {
+    //     return item.buyout;
+    // });
 }
 
 
 function getAveragePrice(Prices) {
-    const allPrice = _.map(Prices, 'bid');
+    const allPrice = _.map(Prices, 'buyout');
     const reduceValidPrices = filterOutliers(allPrice);
     return Math.round(_.mean(reduceValidPrices));
 }

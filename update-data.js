@@ -35,9 +35,13 @@ function loadFile() {
                         writing = true;
                         dateOldFile = new Date();
                         data.time = dateOldFile.getTime();
-                        fs.writeFile(server + '-' + local + '.json', JSON.stringify(data), 'utf8', () => {
-                            console.log(chalk.green('FILE GENERATED'));
-                            resolve(data);
+                        fs.writeFile(server + '-' + local + '.json', JSON.stringify(data), 'utf8', err => {
+                            if (err) {
+                                reject(err);
+                            } else {
+                                console.log(chalk.green('FILE GENERATED'));
+                                resolve(data);
+                            }
                         });
                     })
                     .catch(err => {
@@ -45,7 +49,7 @@ function loadFile() {
                     });
             })
             .catch((err) => {
-                console.error(chalk.red('Cant get to api'));
+                console.error(chalk.red('Cant get to api'), apiUrl);
             })
     });
 }
