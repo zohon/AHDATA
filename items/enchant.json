@@ -1,0 +1,176 @@
+[
+    {
+        "id": 153437,
+        "label": "Gloves - Kul Tiran Crafting",
+        "info": "Enchanting (0) 10 30 50",
+        "recipe": [
+            {
+                "id": 152875,
+                "quantity": 5
+            }
+        ]
+    },
+    {
+        "id": 159788,
+        "label": "Weapon - Versatile Navigation",
+        "info": "Enchanting (150)",
+        "recipe": [
+            {
+                "id": 152876,
+                "quantity": 5
+            },
+            {
+                "id": 152875,
+                "quantity": 15
+            },
+            {
+                "id": 152877,
+                "quantity": 1
+            }
+        ]
+    },
+    {
+        "id": 159789,
+        "label": "Weapon - Stalwart Navigation",
+        "info": "Enchanting (150)",
+        "recipe": [
+            {
+                "id": 152876,
+                "quantity": 5
+            },
+            {
+                "id": 152875,
+                "quantity": 15
+            },
+            {
+                "id": 152877,
+                "quantity": 1
+            }
+        ]
+    },
+    {
+        "id": 159787,
+        "label": "Weapon - Masterful Navigation",
+        "info": "Enchanting (150)",
+        "recipe": [
+            {
+                "id": 152876,
+                "quantity": 5
+            },
+            {
+                "id": 152875,
+                "quantity": 15
+            },
+            {
+                "id": 152877,
+                "quantity": 1
+            }
+        ]
+    },
+    {
+        "id": 159785,
+        "label": "Weapon - Deadly Navigation",
+        "info": "Enchanting (150)",
+        "recipe": [
+            {
+                "id": 152876,
+                "quantity": 5
+            },
+            {
+                "id": 152875,
+                "quantity": 15
+            },
+            {
+                "id": 152877,
+                "quantity": 1
+            }
+        ]
+    },        
+    {
+        "id": 153438,
+        "label": "Ring - Pact of Critical Strike",
+        "info": "Enchanting (50) 50 75 0",
+        "recipe": [
+            {
+                "id": 152875,
+                "quantity": 8
+            }
+        ]
+    },  
+    {
+        "id": 153442,
+        "label": "Ring - Pact of Critical Strike",
+        "info": "Enchanting (115) 115 132 150",
+        "recipe": [
+            {
+                "id": 152876,
+                "quantity": 3
+            },
+            {
+                "id": 152875,
+                "quantity": 15
+            },
+            {
+                "id": 152877,
+                "quantity": 4
+            }
+        ]
+    },
+    {
+        "id": 153444,
+        "label": "Ring - Pact of Mastery",
+        "info": "Enchanting (115) 115 132 150",
+        "recipe": [
+            {
+                "id": 152876,
+                "quantity": 3
+            },
+            {
+                "id": 152875,
+                "quantity": 15
+            },
+            {
+                "id": 152877,
+                "quantity": 4
+            }
+        ]
+    },
+    {
+        "id": 153443,
+        "label": "Ring - Pact of Haste",
+        "info": "Enchanting (115) 115 132 150",
+        "recipe": [
+            {
+                "id": 152876,
+                "quantity": 3
+            },
+            {
+                "id": 152875,
+                "quantity": 15
+            },
+            {
+                "id": 152877,
+                "quantity": 4
+            }
+        ]
+    },
+    {
+        "id": 153445,
+        "label": "Ring - Pact of Versatility",
+        "info": "Enchanting (115) 115 132 150",
+        "recipe": [
+            {
+                "id": 152876,
+                "quantity": 3
+            },
+            {
+                "id": 152875,
+                "quantity": 15
+            },
+            {
+                "id": 152877,
+                "quantity": 4
+            }
+        ]
+    }
+]

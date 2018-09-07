@@ -1,0 +1,37 @@
+[
+    {
+        "id": 152510,
+        "label": "Anchor weed",
+        "info": "Seems to share the spawns with any other herb, but more rare."
+    },
+    {
+        "id": 152509,
+        "label": "Siren's Pollen",
+        "info": "Found growing on the sides of trees."
+    },
+    {
+        "id": 152507,
+        "label": "Akunda's Bite",
+        "info": "Found in deserts like Voldun."
+    },
+    {
+        "id": 152505,
+        "label": "Riverbud",
+        "info": "Found around rivers and small lakes."
+    },
+    {
+        "id": 152506,
+        "label": "Star Moss",
+        "info": "Found on the sides of buildings and stone structures."
+    },
+    {
+        "id": 152511,
+        "label": "Sea Stalk",
+        "info": "Found on the coastline near the sea."
+    },
+    {
+        "id": 152508,
+        "label": "Winter Kiss",
+        "info": "Found in cold and snowy areas like in Drustvar."
+    }
+]

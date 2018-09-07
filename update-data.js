@@ -1,12 +1,13 @@
+var fs = require('fs');
+const chalk = require('chalk');
+
 const key = 'arxr7nstg8rxrn7c7ceacvy9ss83ynrq';
 const server = 'sargeras';
 const local = 'fr_FR';
-let apiUrl = 'https://eu.api.battle.net' + '/wow/auction/data/' + server + '?locale=' + local + '&apikey=' + key;
-var fs = require('fs');
+const apiUrl = 'https://eu.api.battle.net' + '/wow/auction/data/' + server + '?locale=' + local + '&apikey=' + key;
+const fileName = './datas/'+server + '-' + local;
 
 const TIMER = 20 * 1000;
-
-const chalk = require('chalk');
 let dateOldFile = new Date();
 
 function getData(apiUrl) {
@@ -35,7 +36,7 @@ function loadFile() {
                         writing = true;
                         dateOldFile = new Date();
                         data.time = dateOldFile.getTime();
-                        fs.writeFile(server + '-' + local + '.json', JSON.stringify(data), 'utf8', err => {
+                        fs.writeFile(fileName + '.json', JSON.stringify(data), 'utf8', err => {
                             if (err) {
                                 reject(err);
                             } else {
@@ -66,9 +67,6 @@ const loading = () => {
 };
 
 module.exports = () => {
-
-    const fileName = server + '-' + local;
-
     return new Promise((resolve, reject) => {
         if (fs.existsSync(fileName + '.json')) {
             let data = fs.readFileSync(fileName + '.json');
