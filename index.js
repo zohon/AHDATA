@@ -21,10 +21,24 @@ tailor = _.map(tailor, item => {
     return item;
 });
 
+let herba = require('./herba.json');
+herba = _.map(herba, item => {
+    item.type = chalk.green('herba');
+    return item;
+});
+
+let enchant = require('./enchant.json');
+enchant = _.map(enchant, item => {
+    item.type = chalk.cyan('enchant');
+    return item;
+});
+
 const listData = [
     ...fish,
     ...cooking,
-    ...tailor
+    ...tailor,
+    ...herba,
+    ...enchant
 ];
 
 let oldData = [];
@@ -43,13 +57,12 @@ const TIMER = 10 * 1000;
 function displayInfo(data) {
     const allJsonData = data;
 
-
     let result = _.map(listData, item => {
         const infos = getInfoItem(allJsonData, item);
         if (_.first(infos)) {
             item.nb = _.sumBy(infos, 'quantity');
-            item.low = getFirstRealPrice(infos).bid;
-            item.margin = getFirstRealPrice(infos).bid;
+            item.low = getFirstRealPrice(infos).buyout;
+            item.margin = getFirstRealPrice(infos).buyout;
             item.cost = '';
             item.mean = getAveragePrice(infos);
 
@@ -57,14 +70,14 @@ function displayInfo(data) {
                 const recipe = _.map(item.recipe, compo => {
                     const infosRecipe = getInfoItem(allJsonData, compo);
                     if (_.first(infosRecipe)) {
-                        return Math.round(getFirstRealPrice(infosRecipe).bid * compo.quantity);
+                        return Math.round(getFirstRealPrice(infosRecipe).buyout * compo.quantity);
                     }
                     return 0;
                 })
                 
                 item.mean = getAveragePrice(infos);
                 item.cost = _.sum(recipe);
-                item.margin = item.mean - _.sum(recipe);
+                item.margin = Math.round(item.low - _.sum(recipe));
             }
 
         }
@@ -98,23 +111,24 @@ function displayInfo(data) {
 }
 
 function getInfoItem(allJsonData, item) {
-    const fishs = _.filter(allJsonData.auctions, { item: item.id });
+    let fishs = _.filter(allJsonData.auctions, { item: item.id });
+    fishs =_.filter(fishs, 'buyout');
     const prices = _.map(fishs, fish => {
-        return { bid: Math.round((fish.bid / fish.quantity) / 100) / 100, quantity: fish.quantity };
+        return { buyout: Math.round((fish.buyout / fish.quantity) / 100) / 100, bid: Math.round((fish.bid / fish.quantity) / 100) / 100, quantity: fish.quantity };
     });
-    return _.orderBy(prices, ['bid', 'quantity'], ['asc', 'asc']);
+    return _.orderBy(prices, ['buyout', 'quantity'], ['asc', 'asc']);
 }
 
 function getFirstRealPrice(items) {
-    const average = getAveragePrice(items);
-    return _.find(items, item => {
-        return item.bid >= average * 0.3;
-    });
+    return _.first(items);
+    // const average = getAveragePrice(items);
+    // return _.find(items, item => {
+    //     return item.bid >= average * 0.3;
+    // });
 }
 
-
 function getAveragePrice(Prices) {
-    const allPrice = _.map(Prices, 'bid');
+    const allPrice = _.map(Prices, 'buyout');
     const reduceValidPrices = filterOutliers(allPrice);
     return Math.round(_.mean(reduceValidPrices));
 }
