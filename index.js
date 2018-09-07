@@ -91,30 +91,42 @@ function displayInfo(data) {
     console.log(chalk.blue(fileDate.toLocaleString()), chalk.green(event.toLocaleString()));
     console.log(chalk.yellow('-----------------------------------------------'));
     _.each(result, res => {
-        const info = [res.zone, res.area, res.info];
-        const display = [
-            chalk.bold(res.type),
-            chalk.bold(res.label),
-            chalk.cyan(res.low),
-            chalk.magenta(res.mean),
-            chalk.red(res.cost),
-            chalk.yellow(res.margin),
-            chalk.green("["+res.nb+"]"),
-            _.filter(info).join(' ')
-        ]
+        if(res) {
 
-        console.log(
-            _.filter(display).join(' ')
-        );
+            const info = [res.zone, res.area, res.info];
+            const display = [
+                chalk.bold(res.type),
+                chalk.bold(res.label),
+                chalk.cyan(displayUndefined(res.low)),
+                chalk.magenta(displayUndefined(res.mean)),
+                chalk.red(displayUndefined(res.cost)),
+                chalk.yellow(displayUndefined(res.margin)),
+                chalk.green("["+displayUndefined(res.nb)+"]"),
+                _.filter(info).join(' ')
+            ]
+            console.log(
+                _.filter(display).join(' ')
+            );
+        }
     });
     oldData = result;
 }
 
+function displayUndefined(data) {
+    if(!data) {
+        return 0;
+    }
+    return data;
+}
+
 function getInfoItem(allJsonData, item) {
-    let fishs = _.filter(allJsonData.auctions, { item: item.id });
-    fishs =_.filter(fishs, 'buyout');
+    let fishs = _.filter(allJsonData.auctions, { item: item.id});
+    fishs = _.filter(fishs, 'buyout');
+    if (!fish.length) {
+        return [];
+    }
     const prices = _.map(fishs, fish => {
-        return { buyout: Math.round((fish.buyout / fish.quantity) / 100) / 100, bid: Math.round((fish.bid / fish.quantity) / 100) / 100, quantity: fish.quantity };
+        return { buyout: Math.round((fish.buyout / fish.quantity) / 100) / 100, quantity: fish.quantity };
     });
     return _.orderBy(prices, ['buyout', 'quantity'], ['asc', 'asc']);
 }
@@ -123,7 +135,7 @@ function getFirstRealPrice(items) {
     return _.first(items);
     // const average = getAveragePrice(items);
     // return _.find(items, item => {
-    //     return item.bid >= average * 0.3;
+    //     return item.byout >= average * 0.3;
     // });
 }
 
