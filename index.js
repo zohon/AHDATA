@@ -1,33 +1,36 @@
 const updateData = require('./update-data.js');
 const fs = require("fs");
-var _ = require('lodash');
+const _ = require('lodash');
 const chalk = require('chalk');
+const clear = require('clear');
 
-let fish = require('./fish.json');
+
+
+let fish = require('./items/fish.json');
 fiss = _.map(fish, item => {
     item.type = chalk.blue('fish');
     return item;
 });
 
-let cooking = require('./cooking.json');
+let cooking = require('./items/cooking.json');
 cooking = _.map(cooking, item => {
     item.type = chalk.red('cooking');
     return item;
 });
 
-let tailor = require('./tailor.json');
+let tailor = require('./items/tailor.json');
 tailor = _.map(tailor, item => {
     item.type = chalk.magenta('tailor');
     return item;
 });
 
-let herba = require('./herba.json');
+let herba = require('./items/herba.json');
 herba = _.map(herba, item => {
     item.type = chalk.green('herba');
     return item;
 });
 
-let enchant = require('./enchant.json');
+let enchant = require('./items/enchant.json');
 enchant = _.map(enchant, item => {
     item.type = chalk.cyan('enchant');
     return item;
@@ -53,6 +56,22 @@ const TIMER = 10 * 1000;
             }, TIMER);
         });
 })();
+
+
+var express = require('express');
+var app = express();
+var cors = require('cors')
+
+app.use(cors())
+
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', function(req, res) {
+  res.send(oldData);
+});
+
+app.listen(3000, function () {
+    console.log('Example app listening on port 3000!')
+})
 
 function displayInfo(data) {
     const allJsonData = data;
@@ -84,15 +103,18 @@ function displayInfo(data) {
         return item;
     })
     result = _.orderBy(result, ['margin'], ['desc']);
+    //consoleDisplay(result);
+    oldData = result;
+}
 
+function consoleDisplay(result) {
     const event = new Date();
     const fileDate = new Date(allJsonData.time);
-    console.log('\x1Bc');
+    clear();
     console.log(chalk.blue(fileDate.toLocaleString()), chalk.green(event.toLocaleString()));
     console.log(chalk.yellow('-----------------------------------------------'));
     _.each(result, res => {
         if(res) {
-
             const info = [res.zone, res.area, res.info];
             const display = [
                 chalk.bold(res.type),
@@ -109,7 +131,6 @@ function displayInfo(data) {
             );
         }
     });
-    oldData = result;
 }
 
 function displayUndefined(data) {
