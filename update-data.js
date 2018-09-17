@@ -2,10 +2,10 @@ var fs = require('fs');
 const chalk = require('chalk');
 
 const key = 'arxr7nstg8rxrn7c7ceacvy9ss83ynrq';
-const server = 'sargeras';
+const server = 'dalaran';
 const local = 'fr_FR';
-const apiUrl = 'https://eu.api.battle.net' + '/wow/auction/data/' + server + '?locale=' + local + '&apikey=' + key;
-const fileName = './datas/'+server + '-' + local;
+
+
 
 const TIMER = 20 * 1000;
 let dateOldFile = new Date();
@@ -26,7 +26,7 @@ function getData(apiUrl) {
 
 }
 
-function loadFile() {
+function loadFile(fileName, apiUrl) {
 
     return new Promise((resolve, reject) => {
         getData(apiUrl)
@@ -66,7 +66,22 @@ const loading = () => {
     }, 300);
 };
 
-module.exports = () => {
+module.exports = (params) => {
+
+    if(params) {
+        if(params.server) {
+            server = params.server;
+        }
+    
+        if(params.local) {
+            local = params.local;
+        }
+    }
+
+
+    const fileName = './datas/'+server + '-' + local;
+    const apiUrl = 'https://eu.api.battle.net' + '/wow/auction/data/' + server + '?locale=' + local + '&apikey=' + key;
+
     return new Promise((resolve, reject) => {
         if (fs.existsSync(fileName + '.json')) {
             let data = fs.readFileSync(fileName + '.json');
@@ -77,14 +92,14 @@ module.exports = () => {
             if (diffTime > TIMER) {
                 console.log('UPDATING FILE');
                 //fs.rename(fileName + '.json', fileName + '_old.json', () => {});
-                loadFile()
+                loadFile(fileName, apiUrl)
                     .then(resolve);
             } else {
                 resolve(jsonContent);
             }
         } else {
             console.log('LOADING FILE');
-            loadFile()
+            loadFile(fileName, apiUrl)
                 .then(resolve);
         }
     });

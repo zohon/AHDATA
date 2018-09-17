@@ -5,34 +5,39 @@ const chalk = require('chalk');
 const clear = require('clear');
 
 
-
 let fish = require('./items/fish.json');
 fiss = _.map(fish, item => {
-    item.type = chalk.blue('fish');
+    item.type = 'fish';
     return item;
 });
 
 let cooking = require('./items/cooking.json');
 cooking = _.map(cooking, item => {
-    item.type = chalk.red('cooking');
+    item.type = 'cooking';
     return item;
 });
 
 let tailor = require('./items/tailor.json');
 tailor = _.map(tailor, item => {
-    item.type = chalk.magenta('tailor');
+    item.type = 'tailor';
     return item;
 });
 
 let herba = require('./items/herba.json');
 herba = _.map(herba, item => {
-    item.type = chalk.green('herba');
+    item.type = 'herba';
     return item;
 });
 
 let enchant = require('./items/enchant.json');
 enchant = _.map(enchant, item => {
-    item.type = chalk.cyan('enchant');
+    item.type = 'enchant';
+    return item;
+});
+
+let alch = require('./items/alch.json');
+alch = _.map(alch, item => {
+    item.type = 'alch';
     return item;
 });
 
@@ -41,7 +46,8 @@ const listData = [
     ...cooking,
     ...tailor,
     ...herba,
-    ...enchant
+    ...enchant,
+    ...alch
 ];
 
 let oldData = [];
@@ -73,6 +79,17 @@ app.listen(3000, function () {
     console.log('Example app listening on port 3000!')
 })
 
+function getReceipePrice(item, allJsonData, index = '') {
+    return _.map(item.recipe, compo => {
+        const infosRecipe = getInfoItem(allJsonData, compo);
+        if (_.first(infosRecipe) && compo['quantity'+index]) {
+            return Math.round(getFirstRealPrice(infosRecipe).buyout * compo['quantity'+index]);
+        }
+        return 0;
+    })
+}
+
+
 function displayInfo(data) {
     const allJsonData = data;
 
@@ -86,30 +103,54 @@ function displayInfo(data) {
             item.mean = getAveragePrice(infos);
 
             if (item.recipe) {
-                const recipe = _.map(item.recipe, compo => {
-                    const infosRecipe = getInfoItem(allJsonData, compo);
-                    if (_.first(infosRecipe)) {
-                        return Math.round(getFirstRealPrice(infosRecipe).buyout * compo.quantity);
-                    }
-                    return 0;
-                })
-                
-                item.mean = getAveragePrice(infos);
+
+                const recipe = getReceipePrice(item, allJsonData);
+                const recipe2 = getReceipePrice(item, allJsonData, 2);
+                const recipe3 = getReceipePrice(item, allJsonData, 3);
+
+                let item2 = null;
+                if (_.sum(recipe2)) {
+                    item2 = _.cloneDeep(item);
+                    item2.level = 2;
+                    item2.cost = _.sum(recipe2);
+                    item2.margin = Math.round(item.low - _.sum(recipe2));
+                }
+
+                let item3 = null;
+                if (_.sum(recipe3)) {
+                    item3 = _.cloneDeep(item);
+                    item3.level = 3;
+                    item3.cost = _.sum(recipe3);
+                    item3.margin = Math.round(item.low - _.sum(recipe3));
+                }
+
                 item.cost = _.sum(recipe);
                 item.margin = Math.round(item.low - _.sum(recipe));
+
+                if(item2 && item3) {
+                    return [
+                        item,
+                        item2,
+                        item3
+                    ]
+                }
+
             }
 
         }
         return item;
     })
+
+    result = _.flattenDepth(result, 1);
     result = _.orderBy(result, ['margin'], ['desc']);
-    //consoleDisplay(result);
+
+    consoleDisplay(result, allJsonData);
     oldData = result;
 }
 
-function consoleDisplay(result) {
-    const event = new Date();
+function consoleDisplay(result, allJsonData) {
     const fileDate = new Date(allJsonData.time);
+    const event = new Date();
     clear();
     console.log(chalk.blue(fileDate.toLocaleString()), chalk.green(event.toLocaleString()));
     console.log(chalk.yellow('-----------------------------------------------'));
