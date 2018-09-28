@@ -2,10 +2,8 @@ var fs = require('fs');
 const chalk = require('chalk');
 
 const key = 'arxr7nstg8rxrn7c7ceacvy9ss83ynrq';
-const server = 'dalaran';
-const local = 'fr_FR';
-
-
+let server = 'sargeras';
+let local = 'fr_FR';
 
 const TIMER = 20 * 1000;
 let dateOldFile = new Date();
@@ -35,6 +33,8 @@ function loadFile(fileName, apiUrl) {
                     .then((data) => {
                         writing = true;
                         dateOldFile = new Date();
+                        data.server = server;
+                        data.local = local;
                         data.time = dateOldFile.getTime();
                         fs.writeFile(fileName + '.json', JSON.stringify(data), 'utf8', err => {
                             if (err) {

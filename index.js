@@ -50,18 +50,19 @@ const listData = [
     ...alch
 ];
 
-let oldData = [];
+let listServer = [];
 const TIMER = 10 * 1000;
 
-(function start() {
-    updateData()
+function start(params) {
+    console.log('start search', params);
+    return updateData(params)
         .then(data => {
             displayInfo(data);
             setTimeout(() => {
-                start();
+                start(params);
             }, TIMER);
         });
-})();
+}
 
 
 var express = require('express');
@@ -70,9 +71,39 @@ var cors = require('cors')
 
 app.use(cors())
 
-// respond with "hello world" when a GET request is made to the homepage
+app.get('/:local/:server', function(req, res) {
+
+    serverParameters = {
+        server : req.params.server,
+        local : req.params.local
+    };
+
+    const dataToShow = getData(serverParameters);
+    if(dataToShow) {
+        res.send(dataToShow);
+    } else {
+        start(serverParameters)
+        .then(() => {
+            res.send(getData(serverParameters));
+        })
+    }
+});
+
+function getData(params) {
+    const dataServer = _.find(listServer, params);
+    if(dataServer && dataServer.new) {
+        return dataServer.new;
+    }
+    return;
+}
+
 app.get('/', function(req, res) {
-  res.send(oldData);
+
+    if(listServer[0] && listServer[0].new) {
+        res.send(listServer[0].new);
+    } else {
+        res.send();
+    }
 });
 
 app.listen(3000, function () {
@@ -89,29 +120,27 @@ function getReceipePrice(item, allJsonData, index = '') {
     })
 }
 
-
 function displayInfo(data) {
     const allJsonData = data;
 
     let result = _.map(listData, item => {
         const infos = getInfoItem(allJsonData, item);
         if (_.first(infos)) {
+            item.grpType = _.countBy(infos, 'timeLeft');
             item.nb = _.sumBy(infos, 'quantity');
             item.low = getFirstRealPrice(infos).buyout;
             item.margin = getFirstRealPrice(infos).buyout;
-            item.cost = '';
+            item.cost = 'fake';
             item.mean = getAveragePrice(infos);
 
             if (item.recipe) {
-
                 const recipe = getReceipePrice(item, allJsonData);
                 const recipe2 = getReceipePrice(item, allJsonData, 2);
                 const recipe3 = getReceipePrice(item, allJsonData, 3);
-
                 let item2 = null;
                 if (_.sum(recipe2)) {
                     item2 = _.cloneDeep(item);
-                    item2.level = 2;
+                    item2.level = 3;
                     item2.cost = _.sum(recipe2);
                     item2.margin = Math.round(item.low - _.sum(recipe2));
                 }
@@ -119,7 +148,7 @@ function displayInfo(data) {
                 let item3 = null;
                 if (_.sum(recipe3)) {
                     item3 = _.cloneDeep(item);
-                    item3.level = 3;
+                    item3.level = 2;
                     item3.cost = _.sum(recipe3);
                     item3.margin = Math.round(item.low - _.sum(recipe3));
                 }
@@ -130,8 +159,8 @@ function displayInfo(data) {
                 if(item2 && item3) {
                     return [
                         item,
-                        item2,
-                        item3
+                        item3,
+                        item2
                     ]
                 }
 
@@ -144,8 +173,18 @@ function displayInfo(data) {
     result = _.flattenDepth(result, 1);
     result = _.orderBy(result, ['margin'], ['desc']);
 
-    consoleDisplay(result, allJsonData);
-    oldData = result;
+    //consoleDisplay(result, allJsonData);
+    const serverActual = _.find(listServer, {server : allJsonData.server});
+    if (serverActual) {
+        serverActual.new = result;
+    } else {
+        listServer.push({
+            server : allJsonData.server,
+            local : allJsonData.local,
+            new : result
+        });
+    }
+
 }
 
 function consoleDisplay(result, allJsonData) {
@@ -153,7 +192,10 @@ function consoleDisplay(result, allJsonData) {
     const event = new Date();
     clear();
     console.log(chalk.blue(fileDate.toLocaleString()), chalk.green(event.toLocaleString()));
-    console.log(chalk.yellow('-----------------------------------------------'));
+    console.log(chalk.yellow('--------------- '+allJsonData.server+' ----------------'));
+
+    result = result.slice(0, 5);
+
     _.each(result, res => {
         if(res) {
             const info = [res.zone, res.area, res.info];
@@ -188,7 +230,11 @@ function getInfoItem(allJsonData, item) {
         return [];
     }
     const prices = _.map(fishs, fish => {
-        return { buyout: Math.round((fish.buyout / fish.quantity) / 100) / 100, quantity: fish.quantity };
+        return {
+            buyout: Math.round((fish.buyout / fish.quantity) / 100) / 100,
+            quantity: fish.quantity,
+            timeLeft: fish.timeLeft,
+        };
     });
     return _.orderBy(prices, ['buyout', 'quantity'], ['asc', 'asc']);
 }

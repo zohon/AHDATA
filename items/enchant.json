@@ -11,6 +11,50 @@
         ]
     },
     {
+        "id": 153431,
+        "label": "Gloves - Kul Tiran Mining",
+        "info": "Enchanting (0) 10 30 50",
+        "recipe": [
+            {
+                "id": 152875,
+                "quantity": 5
+            }
+        ]
+    },
+    {
+        "id": 153434,
+        "label": "Gloves - Kul Tiran Skinning",
+        "info": "Enchanting (0) 10 30 50",
+        "recipe": [
+            {
+                "id": 152875,
+                "quantity": 5
+            }
+        ]
+    }, 
+    {
+        "id": 153430,
+        "label": "Gloves - Kul Tiran Herbalism",
+        "info": "Enchanting (0) 10 30 50",
+        "recipe": [
+            {
+                "id": 152875,
+                "quantity": 5
+            }
+        ]
+    },
+    {
+        "id": 153435,
+        "label": "Gloves - Kul Tiran Surveing",
+        "info": "Enchanting (0) 10 30 50",
+        "recipe": [
+            {
+                "id": 152875,
+                "quantity": 5
+            }
+        ]
+    },        
+    {
         "id": 159788,
         "label": "Weapon - Versatile Navigation",
         "info": "Enchanting (150)",
