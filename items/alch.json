@@ -51,6 +51,31 @@
     },
     {
         "id": 152638,
+        "label": "Flask of the Endless Fathoms (intel 238)",
+        "info": null,
+        "recipe": [
+            {
+                "id": 152510,
+                "quantity": 10,
+                "quantity2": 5,
+                "quantity3": 5
+            },
+            {
+                "id": 152508,
+                "quantity": 15,
+                "quantity2": 10,
+                "quantity3": 10
+            },
+            {
+                "id": 152505,
+                "quantity": 20,
+                "quantity2": 15,
+                "quantity3": 15
+            }
+        ]
+    },
+    {
+        "id": 152638,
         "label": "Flask of the Undertow (agility 238)",
         "info": null,
         "recipe": [
@@ -71,6 +96,25 @@
                 "quantity": 20,
                 "quantity2": 15,
                 "quantity3": 15
+            }
+        ]
+    },
+    {
+        "id": 163222,
+        "label": "Battle potion of intellect (intel 238)",
+        "info": null,
+        "recipe": [
+            {
+                "id": 152509,
+                "quantity": 15,
+                "quantity2":10,
+                "quantity3": 10
+            },
+            {
+                "id": 152505,
+                "quantity": 10,
+                "quantity2": 8,
+                "quantity3": 8
             }
         ]
     }

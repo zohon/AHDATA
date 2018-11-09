@@ -56,20 +56,26 @@
     },        
     {
         "id": 159788,
-        "label": "Weapon - Versatile Navigation",
+        "label": "Weapon - Versatile Navigation (Navigation assurée)",
         "info": "Enchanting (150)",
         "recipe": [
             {
                 "id": 152876,
-                "quantity": 5
+                "quantity": 8,
+                "quantity2": 6,
+                "quantity3": 5
             },
             {
                 "id": 152875,
-                "quantity": 15
+                "quantity": 20,
+                "quantity2": 18,
+                "quantity3": 15
             },
             {
                 "id": 152877,
-                "quantity": 1
+                "quantity": 1,
+                "quantity2": 1,
+                "quantity3": 1
             }
         ]
     },
@@ -80,59 +86,102 @@
         "recipe": [
             {
                 "id": 152876,
-                "quantity": 5
+                "quantity": 8,
+                "quantity2": 6,
+                "quantity3": 5
             },
             {
                 "id": 152875,
-                "quantity": 15
+                "quantity": 20,
+                "quantity2": 18,
+                "quantity3": 15
             },
             {
                 "id": 152877,
-                "quantity": 1
+                "quantity": 1,
+                "quantity2": 1,
+                "quantity3": 1
             }
         ]
     },
     {
         "id": 159787,
-        "label": "Weapon - Masterful Navigation",
+        "label": "Weapon - Masterful Navigation (magistral)",
         "info": "Enchanting (150)",
         "recipe": [
             {
                 "id": 152876,
-                "quantity": 5
+                "quantity": 8,
+                "quantity2": 6,
+                "quantity3": 5
             },
             {
                 "id": 152875,
-                "quantity": 15
+                "quantity": 20,
+                "quantity2": 18,
+                "quantity3": 15
             },
             {
                 "id": 152877,
-                "quantity": 1
+                "quantity": 1,
+                "quantity2": 1,
+                "quantity3": 1
             }
         ]
     },
     {
         "id": 159785,
-        "label": "Weapon - Deadly Navigation",
+        "label": "Weapon - Deadly Navigation (meutriere)",
         "info": "Enchanting (150)",
         "recipe": [
             {
                 "id": 152876,
-                "quantity": 5
+                "quantity": 8,
+                "quantity2": 6,
+                "quantity3": 5
             },
             {
                 "id": 152875,
-                "quantity": 15
+                "quantity": 20,
+                "quantity2": 18,
+                "quantity3": 15
             },
             {
                 "id": 152877,
-                "quantity": 1
+                "quantity": 1,
+                "quantity2": 1,
+                "quantity3": 1
             }
         ]
-    },        
+    },
+    {
+        "id": 159786,
+        "label": "Weapon - Quick Navigation (rapid)",
+        "info": "Enchanting (150)",
+        "recipe": [
+            {
+                "id": 152876,
+                "quantity": 8,
+                "quantity2": 6,
+                "quantity3": 5
+            },
+            {
+                "id": 152875,
+                "quantity": 20,
+                "quantity2": 18,
+                "quantity3": 15
+            },
+            {
+                "id": 152877,
+                "quantity": 1,
+                "quantity2": 1,
+                "quantity3": 1
+            }
+        ]
+    },             
     {
         "id": 153438,
-        "label": "Ring - Pact of Critical Strike",
+        "label": "Ring - Seal of Critical Strike",
         "info": "Enchanting (50) 50 75 0",
         "recipe": [
             {
@@ -148,15 +197,21 @@
         "recipe": [
             {
                 "id": 152876,
-                "quantity": 3
+                "quantity": 5,
+                "quantity2": 4,
+                "quantity3": 3
             },
             {
                 "id": 152875,
-                "quantity": 15
+                "quantity": 20,
+                "quantity2": 18,
+                "quantity3": 15
             },
             {
                 "id": 152877,
-                "quantity": 4
+                "quantity": 8,
+                "quantity2": 5,
+                "quantity3": 4
             }
         ]
     },
@@ -167,15 +222,21 @@
         "recipe": [
             {
                 "id": 152876,
-                "quantity": 3
+                "quantity": 5,
+                "quantity2": 4,
+                "quantity3": 3
             },
             {
                 "id": 152875,
-                "quantity": 15
+                "quantity": 20,
+                "quantity2": 18,
+                "quantity3": 15
             },
             {
                 "id": 152877,
-                "quantity": 4
+                "quantity": 8,
+                "quantity2": 5,
+                "quantity3": 4
             }
         ]
     },
@@ -186,15 +247,21 @@
         "recipe": [
             {
                 "id": 152876,
-                "quantity": 3
+                "quantity": 5,
+                "quantity2": 4,
+                "quantity3": 3
             },
             {
                 "id": 152875,
-                "quantity": 15
+                "quantity": 20,
+                "quantity2": 18,
+                "quantity3": 15
             },
             {
                 "id": 152877,
-                "quantity": 4
+                "quantity": 8,
+                "quantity2": 5,
+                "quantity3": 4
             }
         ]
     },
@@ -205,15 +272,51 @@
         "recipe": [
             {
                 "id": 152876,
-                "quantity": 3
+                "quantity": 5,
+                "quantity2": 4,
+                "quantity3": 3
             },
             {
                 "id": 152875,
-                "quantity": 15
+                "quantity": 20,
+                "quantity2": 18,
+                "quantity3": 15
             },
             {
                 "id": 152877,
-                "quantity": 4
+                "quantity": 8,
+                "quantity2": 5,
+                "quantity3": 4
+            }
+        ]
+    },
+    {
+        "id": 152875,
+        "label": "Gloom Dust (Poussiere sinistre)",
+        "info": "Enchanting Reagent"
+    },
+    {
+        "id": 152876,
+        "label": "Umbra Shard (Eclat ombreux)",
+        "info": "Enchanting Reagent"
+    },
+    {
+        "id": 152877,
+        "label": "Veiled Crystal (Cristal voilé)",
+        "info": "Enchanting Reagent"
+    },
+    {
+        "id": 162110,
+        "label": "disenchanting-rod",
+        "info": "Enchanting item",
+        "recipe": [
+            {
+                "id": 152875,
+                "quantity": 40
+            },
+            {
+                "id": 152877,
+                "quantity": 5
             }
         ]
     }

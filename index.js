@@ -11,6 +11,12 @@ fiss = _.map(fish, item => {
     return item;
 });
 
+let skinning = require('./items/skinning.json');
+skinning = _.map(skinning, item => {
+    item.type = 'skinning';
+    return item;
+});
+
 let cooking = require('./items/cooking.json');
 cooking = _.map(cooking, item => {
     item.type = 'cooking';
@@ -47,19 +53,33 @@ const listData = [
     ...tailor,
     ...herba,
     ...enchant,
-    ...alch
+    ...alch,
+    ...skinning
 ];
 
 let listServer = [];
 const TIMER = 10 * 1000;
 
+let launchedSearch = [];
+
 function start(params) {
+
+    if(_.find(launchedSearch, params)) {
+        console.log('already searching', params);
+        return;
+    }
+    launchedSearch.push(params);
+
     console.log('start search', params);
+    
     return updateData(params)
         .then(data => {
             displayInfo(data);
             setTimeout(() => {
+
+                launchedSearch = _.reject(launchedSearch, params);
                 start(params);
+
             }, TIMER);
         });
 }
@@ -79,6 +99,7 @@ app.get('/:local/:server', function(req, res) {
     };
 
     const dataToShow = getData(serverParameters);
+
     if(dataToShow) {
         res.send(dataToShow);
     } else {
@@ -140,7 +161,7 @@ function displayInfo(data) {
                 let item2 = null;
                 if (_.sum(recipe2)) {
                     item2 = _.cloneDeep(item);
-                    item2.level = 3;
+                    item2.level = 2;
                     item2.cost = _.sum(recipe2);
                     item2.margin = Math.round(item.low - _.sum(recipe2));
                 }
@@ -148,7 +169,7 @@ function displayInfo(data) {
                 let item3 = null;
                 if (_.sum(recipe3)) {
                     item3 = _.cloneDeep(item);
-                    item3.level = 2;
+                    item3.level = 3;
                     item3.cost = _.sum(recipe3);
                     item3.margin = Math.round(item.low - _.sum(recipe3));
                 }

@@ -1,7 +1,7 @@
 var fs = require('fs');
 const chalk = require('chalk');
 
-const key = 'arxr7nstg8rxrn7c7ceacvy9ss83ynrq';
+const key = 'xc52ew92dm2rvrspswxyg4ua6j2cd7rb';
 let server = 'sargeras';
 let local = 'fr_FR';
 
@@ -17,7 +17,14 @@ function getData(apiUrl) {
             res.on('data', chunk => {
                 bodyChunks.push(chunk);
             });
-            res.on('end', () => resolve(JSON.parse(bodyChunks.join(''))))
+            res.on('end', () => {
+                try {
+                    resolve(JSON.parse(bodyChunks.join('')));
+                } catch (e){
+                    reject(e);
+                }
+                
+            })
         });
         req.on('error', err => reject(err))
     });

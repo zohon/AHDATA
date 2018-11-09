@@ -6,11 +6,15 @@
         "recipe": [
             {
                 "id": 152577,
-                "quantity": 30
+                "quantity": 30,
+                "quantity2": 28,
+                "quantity3": 25
             },
             {
                 "id": 152576,
-                "quantity": 15
+                "quantity": 15,
+                "quantity2": 14,
+                "quantity3": 12
             }
         ]
     },

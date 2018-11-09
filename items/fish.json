@@ -1,50 +1,56 @@
 [
     {
         "id": 152547,
-        "label": "Poisson-chat de la Grande mer",
+        "label": "Great Sea Cat Fish [Poisson-chat de la Grande mer]",
         "area": "Inland",
         "zone": "Any"
     },
     {
         "id": 152549,
-        "label": "Loche à caudale rouge",
+        "label": "RedTail Loach [Loche à caudale rouge]",
         "area": "Inland",
         "zone": "Zandalar"
     },
     {
         "id": 152544,
-        "label": "Maquereau visqueux",
+        "label": "Slimy mackerel [Maquereau visqueux]",
         "area": "Coastal",
         "zone": "Zandalar"
     },
     {
         "id": 152543,
-        "label": "Trouble-sable",
+        "label": "Sand Shifter [Trouble-sable]",
         "area": "Coastal",
         "zone": "Zandalar"
     },
     {
         "id": 162515,
-        "label": "Saumon de minuit",
+        "label": "Midnight Salmon [Saumon de minuit]",
         "area": "Any",
         "zone": "Any"
     },
     {
         "id": 152546,
-        "label": "Vivaneau rayé",
+        "label": "Lane Snapper [Vivaneau rayé]",
         "area": "Coastal",
         "zone": "Kul Tiras"
     },
     {
         "id": 152545,
-        "label": "Crocs-pointus frénétique",
+        "label": "Frenzied Fangtooth [Crocs-pointus frénétique]",
         "area": "Coastal",
         "zone": "Kul Tiras"
     },
     {
         "id": 152548,
-        "label": "Perche de Tiragarde",
+        "label": "Tiragarde Perch [Perche de Tiragarde]",
         "area": "Inland",
         "zone": "Kul Tiras"
+    },
+    {
+        "id": 160711,
+        "label": "Aroomatic Fish Oil",
+        "area": "Inside",
+        "zone": "Fish"
     }
 ]
